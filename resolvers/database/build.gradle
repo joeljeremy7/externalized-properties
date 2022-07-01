@@ -1,7 +1,7 @@
 description = "Externalized Properties Database Resolver"
 
 dependencies {
-    implementation project(":core")
+    api project(":core")
     testImplementation(testFixtures(project(":core")))
     testImplementation "com.h2database:h2:2.1.214"
 }

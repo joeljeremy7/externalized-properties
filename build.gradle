@@ -4,7 +4,6 @@ plugins {
     id "io.snyk.gradle.plugin.snykplugin"
     id "org.sonarqube"
     id "com.github.ben-manes.versions"
-    id "me.champeau.jmh" apply false
     id "net.ltgt.errorprone" apply false
     id "net.ltgt.nullaway" apply false
 }
@@ -17,6 +16,7 @@ apply from: "${rootDir}/gradle/dependency-updates.gradle"
 
 allprojects {
     apply from: "${rootDir}/gradle/dependency-versions.gradle"
+    apply from: "${rootDir}/gradle/eclipse.gradle"
 
     group = "io.github.joeljeremy7.externalizedproperties"
 
@@ -62,7 +62,8 @@ configure(javaProjects) {
     }
 
     compileJava {
-        options.release = 11
+        options.release.set(11)
+        options.javaModuleVersion.set(project.version)
     }
 
     java {
