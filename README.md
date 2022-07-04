@@ -45,6 +45,7 @@ Externalized Properties jars are published with Automatic-Module-Name manifest a
 
 - Core - `io.github.joeljeremy7.externalizedproperties.core`
 - Database Resolver - `io.github.joeljeremy7.externalizedproperties.resolvers.database`
+- Git Resolver - `io.github.joeljeremy7.externalizedproperties.resolvers.git`
 
 Module authors can use above module names in their module-info.java:
 
@@ -52,6 +53,7 @@ Module authors can use above module names in their module-info.java:
 module foo.bar {
     requires io.github.joeljeremy7.externalizedproperties.core;
     requires io.github.joeljeremy7.externalizedproperties.resolvers.database;
+    requires io.github.joeljeremy7.externalizedproperties.resolvers.git;
 }
 ```
 
