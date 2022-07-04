@@ -39,9 +39,7 @@ implementation "io.github.joeljeremy7.externalizedproperties:core:${version}"
 </dependency>
 ```
 
-### 🧩 Java 9 Module Names
-
-Externalized Properties jars are published with Automatic-Module-Name manifest attribute:
+### 🧩 JPMS Module Names
 
 - Core - `io.github.joeljeremy7.externalizedproperties.core`
 - Database Resolver - `io.github.joeljeremy7.externalizedproperties.resolvers.database`
