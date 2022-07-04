@@ -78,6 +78,19 @@ public class GitResolverTests {
     @Nested
     class BuilderTests {
         @Nested
+        class GitRepositoryMethod {
+            @Test
+            @DisplayName("should throw when resource reader argument is null")
+            void test1() {
+                GitResolver.Builder builder = GitResolver.builder();
+                assertThrows(
+                    IllegalArgumentException.class, 
+                    () -> builder.gitRepository(null)
+                );
+            }
+        }
+
+        @Nested
         class ResourceFilePathMethod {
             @Test
             @DisplayName("should throw when resource file path argument is null")

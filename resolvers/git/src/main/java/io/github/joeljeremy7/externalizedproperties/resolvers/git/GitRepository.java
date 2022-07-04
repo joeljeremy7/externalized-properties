@@ -14,9 +14,6 @@ import java.nio.file.Path;
 import java.util.Comparator;
 import java.util.stream.Stream;
 
-import static io.github.joeljeremy7.externalizedproperties.core.internal.Arguments.requireNonNull;
-import static io.github.joeljeremy7.externalizedproperties.core.internal.Arguments.requireNonNullOrBlank;
-
 /**
  * A Git repository representation.
  */
@@ -63,7 +60,12 @@ public class GitRepository {
      * @return This builder.
      */
     public Path checkout(String pathToCheckout) {
-        requireNonNullOrBlank(pathToCheckout, "pathToCheckout");
+        if (pathToCheckout == null || pathToCheckout.isBlank()) {
+            throw new IllegalArgumentException(
+                "pathToCheckout must not be null or blank."
+            );
+        }
+
         try (Git git = gitCloneOrOpenRepo()) {
             return gitCheckoutPath(git, branch, pathToCheckout);
         }
@@ -178,7 +180,10 @@ public class GitRepository {
          * @return This builder.
          */
         public Builder uri(String uri) {
-            this.uri = requireNonNullOrBlank(uri, "uri");
+            if (uri == null || uri.isBlank()) {
+                throw new IllegalArgumentException("uri must not be null or blank.");
+            }
+            this.uri = uri;
             return this;
         }
         
@@ -193,7 +198,10 @@ public class GitRepository {
          * @return This builder.
          */
         public Builder branch(String branch) {
-            this.branch = requireNonNullOrBlank(branch, "branch");
+            if (branch == null || branch.isBlank()) {
+                throw new IllegalArgumentException("branch must not be null or blank.");
+            }
+            this.branch = branch;
             return this;
         }
 
@@ -208,10 +216,10 @@ public class GitRepository {
          * @return This builder.
          */
         public Builder cloneDirectory(Path cloneDirectory) {
-            this.cloneDirectory = requireNonNull(
-                cloneDirectory, 
-                "cloneDirectory"
-            );
+            if (cloneDirectory == null) {
+                throw new IllegalArgumentException("cloneDirectory must not be null.");
+            }
+            this.cloneDirectory = cloneDirectory;
             return this;
         }
 
@@ -224,10 +232,12 @@ public class GitRepository {
          * @return This builder.
          */
         public Builder credentialsProvider(CredentialsProvider credentialsProvider) {
-            this.credentialsProvider = requireNonNull(
-                credentialsProvider, 
-                "credentialsProvider"
-            );
+            if (credentialsProvider == null) {
+                throw new IllegalArgumentException(
+                    "credentialsProvider must not be null."
+                );
+            }
+            this.credentialsProvider = credentialsProvider;
             return this;
         }
 
@@ -240,10 +250,12 @@ public class GitRepository {
          * @return This builder.
          */
         public Builder sshSessionFactory(SshSessionFactory sshSessionFactory) {
-            this.sshSessionFactory = requireNonNull(
-                sshSessionFactory, 
-                "sshSessionFactory"
-            );
+            if (sshSessionFactory == null) {
+                throw new IllegalArgumentException(
+                    "sshSessionFactory must not be null."
+                );
+            }
+            this.sshSessionFactory = sshSessionFactory;
             return this;
         }
 
