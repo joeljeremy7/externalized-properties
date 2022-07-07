@@ -125,6 +125,21 @@ public class ResourceResolver extends MapResolver {
      * );
      * </pre></blockquote>
      * 
+     * <blockquote><pre>
+     * public class YamlReader implements ResourceReader {
+     *     {@code // Example uses Jackson's ObjectMapper.}
+     *     private final ObjectMapper yamlMapper = new ObjectMapper(new YAMLFactory());
+     * 
+     *     {@code @Override}
+     *     public {@code Map<String, Object>} read(String resourceContents) throws IOException {
+     *         return yamlMapper.readValue(
+     *             resourceContents, 
+     *             new TypeReference{@code <Map<String, Object>>}(){}
+     *         );
+     *     }
+     * }
+     * </pre></blockquote>
+     * 
      * @param url The URL resource to read properties from.
      * @param reader The reader which reads/parses properties from the URL resource into
      * a {@link Map} instance.
@@ -145,7 +160,9 @@ public class ResourceResolver extends MapResolver {
      * ResourceResolver resourceResolver = ResourceResolver.fromUri(
      *     URI.create("file:///path/to/app.properties")
      * );
+     * </pre></blockquote>
      * 
+     * <blockquote><pre>
      * ResourceResolver resourceResolver = ResourceResolver.fromUri(
      *     new File("/path/to/app.properties").toURI()
      * );
@@ -177,11 +194,28 @@ public class ResourceResolver extends MapResolver {
      *     URI.create("file:///path/to/properties.yaml"), 
      *     new YamlReader()
      * );
+     * </pre></blockquote>
      * 
+     * <blockquote><pre>
      * ResourceResolver resourceResolver = ResourceResolver.fromUri(
      *     new File("/path/to/properties.yaml").toURI(), 
      *     new YamlReader()
      * );
+     * </pre></blockquote>
+     * 
+     * <blockquote><pre>
+     * public class YamlReader implements ResourceReader {
+     *     {@code // Example uses Jackson's ObjectMapper.}
+     *     private final ObjectMapper yamlMapper = new ObjectMapper(new YAMLFactory());
+     * 
+     *     {@code @Override}
+     *     public {@code Map<String, Object>} read(String resourceContents) throws IOException {
+     *         return yamlMapper.readValue(
+     *             resourceContents, 
+     *             new TypeReference{@code <Map<String, Object>>}(){}
+     *         );
+     *     }
+     * }
      * </pre></blockquote>
      * 
      * @param uri The URI resource to read properties from.
@@ -204,7 +238,9 @@ public class ResourceResolver extends MapResolver {
      * ResourceResolver resourceResolver = ResourceResolver.fromPath(
      *     Paths.get("path", "to", "app.properties")
      * );
+     * </pre></blockquote>
      * 
+     * <blockquote><pre>
      * ResourceResolver resourceResolver = ResourceResolver.fromUri(
      *     new File("/path/to/app.properties").toPath()
      * );
@@ -236,11 +272,28 @@ public class ResourceResolver extends MapResolver {
      *     Paths.get("path", "to", "properties.yaml"), 
      *     new YamlReader()
      * );
+     * </pre></blockquote>
      * 
+     * <blockquote><pre>
      * ResourceResolver resourceResolver = ResourceResolver.fromUri(
      *     new File("/path/to/properties.yaml").toPath(), 
      *     new YamlReader()
      * );
+     * </pre></blockquote>
+     * 
+     * <blockquote><pre>
+     * public class YamlReader implements ResourceReader {
+     *     {@code // Example uses Jackson's ObjectMapper.}
+     *     private final ObjectMapper yamlMapper = new ObjectMapper(new YAMLFactory());
+     * 
+     *     {@code @Override}
+     *     public {@code Map<String, Object>} read(String resourceContents) throws IOException {
+     *         return yamlMapper.readValue(
+     *             resourceContents, 
+     *             new TypeReference{@code <Map<String, Object>>}(){}
+     *         );
+     *     }
+     * }
      * </pre></blockquote>
      * 
      * @param path The path resource to read properties from.
