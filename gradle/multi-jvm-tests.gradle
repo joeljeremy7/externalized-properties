@@ -1,10 +1,9 @@
-// Ideally every LTS release (after the toolchain's Java language version) 
-// plus the latest released Java version.
-def additionalTestRunsOnJavaVersions = 
+// Ideally every LTS release plus the latest released Java version.
+def additionalTestRunsOnJvmVersions = 
     System.getenv("ADDITIONAL_TEST_RUNS_ON_JVM_VERSIONS") ?:
-    System.getProperties().getOrDefault("additionalTestRunsOnJVMVersions", "")
+    System.getProperties().getOrDefault("additionalTestRunsOnJVMVersions", "17,18")
 
-additionalTestRunsOnJavaVersions.split(",").findAll({ !it.isEmpty() }).each { javaVersion ->
+additionalTestRunsOnJvmVersions.split(",").findAll({ !it.isEmpty() }).each { javaVersion ->
     def testTaskName = "testOnJava${javaVersion}"
     tasks.register(testTaskName, Test) {
         useJUnitPlatform()

@@ -1,5 +1,6 @@
 package io.github.joeljeremy7.externalizedproperties.core.internal;
 
+import io.github.joeljeremy7.externalizedproperties.core.ExternalizedPropertiesException;
 import io.github.joeljeremy7.externalizedproperties.core.testfixtures.MethodUtils;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -10,6 +11,7 @@ import java.lang.reflect.Method;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class MethodHandleFactoryTests {
     private final Method TEST_METHOD = MethodUtils.getMethod(
@@ -23,12 +25,15 @@ public class MethodHandleFactoryTests {
         DefaultMethodInterface::test
     );
 
+    private final Method TEST_NON_DEFAULT_INTERFACE_METHOD = MethodUtils.getMethod(
+        NonDefaultMethodInterface.class,
+        NonDefaultMethodInterface::test
+    );
+
     @Nested
     class CreateMethodHandleMethod {
         @Test
-        @DisplayName(
-            "should create a method handle which invokes the target method"
-        )
+        @DisplayName("should create a method handle which invokes the target method")
         void test1() throws Throwable {
             MethodHandleFactory methodHandleFactory = new MethodHandleFactory();
             MethodHandle methodHandle = 
@@ -75,6 +80,16 @@ public class MethodHandleFactoryTests {
 
             assertSame(methodHandle1, methodHandle2);
         }
+
+        @Test
+        @DisplayName("should throw when method is a non-default/abstract method")
+        void test4() throws Throwable {
+            MethodHandleFactory methodHandleFactory = new MethodHandleFactory();
+            assertThrows(
+                ExternalizedPropertiesException.class, 
+                () -> methodHandleFactory.createMethodHandle(TEST_NON_DEFAULT_INTERFACE_METHOD)
+            );
+        }
     }
 
     /**
@@ -91,5 +106,9 @@ public class MethodHandleFactoryTests {
         default String test(String defaultValue) {
             return defaultValue;
         }
+    }
+
+    private static interface NonDefaultMethodInterface {
+        String test();
     }
 }

@@ -35,7 +35,7 @@ public class Arguments {
      * @return The {@link String} argument.
      */
     public static String requireNonNullOrEmpty(@Nullable String arg, String argName) {
-        if (arg == null || "".equals(arg)) {
+        if (arg == null || arg.isEmpty()) {
             throw new IllegalArgumentException(argName + " must not be null or empty.");
         }
         return arg;
@@ -50,7 +50,7 @@ public class Arguments {
      * @return The {@link String} argument.
      */
     public static String requireNonNullOrBlank(@Nullable String arg, String argName) {
-        if (arg == null || arg.chars().allMatch(Character::isWhitespace)) {
+        if (arg == null || arg.isBlank()) {
             throw new IllegalArgumentException(argName + " must not be null or empty.");
         }
         return arg;

@@ -1,8 +1,8 @@
 description = "Externalized Properties Git Resolver"
 
 dependencies {
-    implementation project(":core")
-    implementation "org.eclipse.jgit:org.eclipse.jgit:${versions.jGit}"
+    api project(":core")
+    api "org.eclipse.jgit:org.eclipse.jgit:${versions.jGit}"
     testImplementation(testFixtures(project(":core")))
     testImplementation "org.eclipse.jgit:org.eclipse.jgit.ssh.apache:${versions.jGit}"
     testImplementation "org.eclipse.jgit:org.eclipse.jgit.junit.http:${versions.jGit}"

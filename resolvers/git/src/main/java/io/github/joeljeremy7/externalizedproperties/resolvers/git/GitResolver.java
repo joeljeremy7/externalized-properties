@@ -9,9 +9,6 @@ import io.github.joeljeremy7.externalizedproperties.core.resolvers.ResourceResol
 import java.nio.file.Path;
 import java.util.Optional;
 
-import static io.github.joeljeremy7.externalizedproperties.core.internal.Arguments.requireNonNull;
-import static io.github.joeljeremy7.externalizedproperties.core.internal.Arguments.requireNonNullOrBlank;
-
 /**
  * A {@link Resolver} implementation which reads properties from a resource file that is
  * stored in a Git repository.
@@ -26,10 +23,7 @@ public class GitResolver implements Resolver {
      * @param resourceResolver The underlying resource resolver.
      */
     private GitResolver(ResourceResolver resourceResolver) {
-        this.resourceResolver = requireNonNull(
-            resourceResolver, 
-            "resourceResolver"
-        );
+        this.resourceResolver = resourceResolver;
     }
 
     /** {@inheritDoc} */
@@ -66,10 +60,10 @@ public class GitResolver implements Resolver {
          * @return This builder.
          */
         public Builder gitRepository(GitRepository gitRepository) {
-            this.gitRepository = requireNonNull(
-                gitRepository, 
-                "gitRepository"
-            );
+            if (gitRepository == null) {
+                throw new IllegalArgumentException("gitRepository must not be null.");
+            }
+            this.gitRepository = gitRepository;
             return this;
         }
 
@@ -84,10 +78,12 @@ public class GitResolver implements Resolver {
          * @return This builder.
          */
         public Builder resourceFilePath(String resourceFilePath) {
-            this.resourceFilePath = requireNonNullOrBlank(
-                resourceFilePath, 
-                "resourceFilePath"
-            );
+            if (resourceFilePath == null || resourceFilePath.isBlank()) {
+                throw new IllegalArgumentException(
+                    "resourceFilePath must not be null or blank."
+                );
+            }
+            this.resourceFilePath = resourceFilePath;
             return this;
         }
 
@@ -99,10 +95,10 @@ public class GitResolver implements Resolver {
          * @return This builder.
          */
         public Builder resourceReader(ResourceReader resourceReader) {
-            this.resourceReader = requireNonNull(
-                resourceReader, 
-                "resourceReader"
-            );
+            if (resourceReader == null) {
+                throw new IllegalArgumentException("resourceReader must not be null.");
+            }
+            this.resourceReader = resourceReader;
             return this;
         }
 

@@ -22,11 +22,8 @@ jacoco {
 jacocoTestCoverageVerification { 
     violationRules { 
         rule { 
-            limit { 
-                // When me move to Java 11 and MethodHandleFactory
-                // logic does not need to be split between Java 8 / Java 9+,
-                // let"s try to achieve 100% coverage.
-                minimum = 0.98
+            limit {
+                minimum = 0.99
             } 
         } 
     } 
