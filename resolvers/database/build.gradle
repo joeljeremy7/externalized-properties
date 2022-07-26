@@ -31,7 +31,7 @@ testing {
                 implementation 'org.testcontainers:mssqlserver'
                 implementation 'com.zaxxer:HikariCP:5.0.1'
                 runtimeOnly 'org.postgresql:postgresql:42.4.0'
-                runtimeOnly 'mysql:mysql-connector-java:8.0.29'
+                runtimeOnly 'mysql:mysql-connector-java:8.0.30'
                 runtimeOnly 'com.oracle.database.jdbc:ojdbc8:21.6.0.0.1'
                 runtimeOnly 'com.microsoft.sqlserver:mssql-jdbc:11.1.2.jre8-preview'
             }
